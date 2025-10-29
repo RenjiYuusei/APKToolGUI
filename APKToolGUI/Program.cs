@@ -141,36 +141,23 @@ namespace APKToolGUI
         public static void SetLanguage()
         {
             String settingsCulture = Settings.Default.Culture;
+            if (settingsCulture.Equals("Auto"))
+            {
+                // Let .NET handle the resource fallback process.
+                // It will automatically use the system's language if a satellite assembly is available,
+                // otherwise it will fall back to the neutral language defined in the main assembly (English).
+                return;
+            }
+
             try
             {
-                if (settingsCulture.Equals("Auto"))
-                {
-                    System.Globalization.CultureInfo systemCulture = System.Globalization.CultureInfo.InstalledUICulture;
-                    try
-                    {
-                        System.Globalization.CultureInfo.GetCultureInfo(systemCulture.Name);
-                        System.Threading.Thread.CurrentThread.CurrentUICulture = systemCulture;
-                        System.Threading.Thread.CurrentThread.CurrentCulture = systemCulture;
-                    }
-                    catch (System.Globalization.CultureNotFoundException)
-                    {
-                        System.Globalization.CultureInfo defaultCulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
-                        System.Threading.Thread.CurrentThread.CurrentUICulture = defaultCulture;
-                        System.Threading.Thread.CurrentThread.CurrentCulture = defaultCulture;
-                    }
-                }
-                else
-                {
-                    System.Globalization.CultureInfo _settingsCulture = System.Globalization.CultureInfo.GetCultureInfo(settingsCulture);
-                    System.Threading.Thread.CurrentThread.CurrentUICulture = _settingsCulture;
-                    System.Threading.Thread.CurrentThread.CurrentCulture = _settingsCulture;
-                }
+                System.Globalization.CultureInfo culture = System.Globalization.CultureInfo.GetCultureInfo(settingsCulture);
+                System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+                System.Threading.Thread.CurrentThread.CurrentCulture = culture;
             }
-            catch
+            catch (System.Globalization.CultureNotFoundException)
             {
-                System.Globalization.CultureInfo defaultCulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
-                System.Threading.Thread.CurrentThread.CurrentUICulture = defaultCulture;
-                System.Threading.Thread.CurrentThread.CurrentCulture = defaultCulture;
+                // If the culture in settings is invalid, do nothing and let it use the default.
             }
         }
 
