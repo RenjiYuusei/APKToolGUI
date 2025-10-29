@@ -33,9 +33,11 @@ jobs:
     - name: Copy essential files to package
       run: |
         cp APKToolGUI/bin/Release/APKToolGUI.exe package/
-        cp APKToolGUI/bin/Release/config.xml package/
         cp -r APKToolGUI/bin/Release/Resources package/
         cp APKToolGUI/bin/Release/*.dll package/
+
+    - name: Create placeholder config.xml
+      run: New-Item -Path package/ -Name "config.xml" -ItemType "file"
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
