@@ -145,8 +145,19 @@ namespace APKToolGUI
             {
                 if (settingsCulture.Equals("Auto"))
                 {
-                    System.Threading.Thread.CurrentThread.CurrentUICulture = System.Globalization.CultureInfo.InstalledUICulture;
-                    System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.InstalledUICulture;
+                    System.Globalization.CultureInfo systemCulture = System.Globalization.CultureInfo.InstalledUICulture;
+                    try
+                    {
+                        System.Globalization.CultureInfo.GetCultureInfo(systemCulture.Name);
+                        System.Threading.Thread.CurrentThread.CurrentUICulture = systemCulture;
+                        System.Threading.Thread.CurrentThread.CurrentCulture = systemCulture;
+                    }
+                    catch (System.Globalization.CultureNotFoundException)
+                    {
+                        System.Globalization.CultureInfo defaultCulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
+                        System.Threading.Thread.CurrentThread.CurrentUICulture = defaultCulture;
+                        System.Threading.Thread.CurrentThread.CurrentCulture = defaultCulture;
+                    }
                 }
                 else
                 {
@@ -157,7 +168,9 @@ namespace APKToolGUI
             }
             catch
             {
-
+                System.Globalization.CultureInfo defaultCulture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
+                System.Threading.Thread.CurrentThread.CurrentUICulture = defaultCulture;
+                System.Threading.Thread.CurrentThread.CurrentCulture = defaultCulture;
             }
         }
 
