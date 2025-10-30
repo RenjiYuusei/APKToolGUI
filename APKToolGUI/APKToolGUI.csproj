@@ -312,6 +312,7 @@
     <Compile Include="ApkTool\Signapk.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ApkTool\DptShell.cs" />
     <Compile Include="ApkTool\Adb.cs" />
     <Compile Include="ApkTool\Zipalign.cs" />
     <Compile Include="Handlers\AdbControlEventHandlers.cs" />
@@ -323,6 +324,7 @@
     <Compile Include="Handlers\FrameworkControlEventHandlers.cs" />
     <Compile Include="Handlers\MainWindowEventHandlers.cs" />
     <Compile Include="Handlers\MenuItemHandlers.cs" />
+    <Compile Include="Handlers\ObfuscateControlEventHandlers.cs" />
     <Compile Include="Handlers\SignControlEventHandlers.cs" />
     <Compile Include="Handlers\SmaliControlEventHandlers.cs" />
     <Compile Include="Handlers\ZipalignControlEventHandlers.cs" />

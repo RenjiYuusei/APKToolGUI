@@ -489,6 +489,78 @@
   <data name="DevicesFound" xml:space="preserve">
     <value>Đã tìm thấy {0} thiết bị</value>
   </data>
+  <data name="ObfuscateTabTitle" xml:space="preserve">
+    <value>Làm rối mã</value>
+  </data>
+  <data name="ObfuscateInputGroup" xml:space="preserve">
+    <value>Đầu vào</value>
+  </data>
+  <data name="ObfuscateOutputGroup" xml:space="preserve">
+    <value>Đầu ra</value>
+  </data>
+  <data name="ObfuscateOptionsGroup" xml:space="preserve">
+    <value>Tùy chọn</value>
+  </data>
+  <data name="ObfuscateInputFileLabel" xml:space="preserve">
+    <value>Tệp gói:</value>
+  </data>
+  <data name="ObfuscateBrowse" xml:space="preserve">
+    <value>Duyệt...</value>
+  </data>
+  <data name="ObfuscateUseOutputDir" xml:space="preserve">
+    <value>Sử dụng thư mục đầu ra</value>
+  </data>
+  <data name="ObfuscateOutputDirectoryLabel" xml:space="preserve">
+    <value>Thư mục đầu ra:</value>
+  </data>
+  <data name="ObfuscateDebug" xml:space="preserve">
+    <value>Cho phép gói gỡ lỗi (--debug)</value>
+  </data>
+  <data name="ObfuscateDisableAcf" xml:space="preserve">
+    <value>Tắt bộ tạo thành phần ứng dụng (--disable-acf)</value>
+  </data>
+  <data name="ObfuscateDumpCode" xml:space="preserve">
+    <value>Xuất mã (--dump-code)</value>
+  </data>
+  <data name="ObfuscateNoisyLog" xml:space="preserve">
+    <value>Bật nhật ký chi tiết (--noisy-log)</value>
+  </data>
+  <data name="ObfuscateSmaller" xml:space="preserve">
+    <value>Tối ưu kích thước nhỏ hơn (--smaller)</value>
+  </data>
+  <data name="ObfuscateNoSign" xml:space="preserve">
+    <value>Không ký gói (--no-sign)</value>
+  </data>
+  <data name="ObfuscateKeepClasses" xml:space="preserve">
+    <value>Giữ lại lớp (--keep-classes)</value>
+  </data>
+  <data name="ObfuscateExcludeAbiLabel" xml:space="preserve">
+    <value>Danh sách ABI loại trừ (phân tách bằng dấu phẩy):</value>
+  </data>
+  <data name="ObfuscateRulesFileLabel" xml:space="preserve">
+    <value>Tệp luật:</value>
+  </data>
+  <data name="ObfuscateButton" xml:space="preserve">
+    <value>Làm rối mã</value>
+  </data>
+  <data name="Obfuscating" xml:space="preserve">
+    <value>Đang làm rối mã</value>
+  </data>
+  <data name="ObfuscateSuccessfullyCompleted" xml:space="preserve">
+    <value>Làm rối mã thành công.</value>
+  </data>
+  <data name="ObfuscateOutputSavedTo" xml:space="preserve">
+    <value>Gói đã làm rối mã được lưu tại "{0}".</value>
+  </data>
+  <data name="ObfuscateInputFileNotFound" xml:space="preserve">
+    <value>Không tìm thấy tệp đầu vào. Vui lòng chọn gói Android hợp lệ.</value>
+  </data>
+  <data name="ObfuscateRulesFileNotFound" xml:space="preserve">
+    <value>Không tìm thấy tệp luật. Vui lòng chọn tệp hợp lệ.</value>
+  </data>
+  <data name="ErrorObfuscating" xml:space="preserve">
+    <value>Xảy ra lỗi khi làm rối gói.</value>
+  </data>
   <data name="InstallApkFailed" xml:space="preserve">
     <value>Cài đặt APK thất bại</value>
   </data>

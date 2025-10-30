@@ -869,7 +869,223 @@ namespace APKToolGUI.Languages {
                 return ResourceManager.GetString("InputFile", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Obfuscate.
+        /// </summary>
+        internal static string ObfuscateTabTitle {
+            get {
+                return ResourceManager.GetString("ObfuscateTabTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Input.
+        /// </summary>
+        internal static string ObfuscateInputGroup {
+            get {
+                return ResourceManager.GetString("ObfuscateInputGroup", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Output.
+        /// </summary>
+        internal static string ObfuscateOutputGroup {
+            get {
+                return ResourceManager.GetString("ObfuscateOutputGroup", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        internal static string ObfuscateOptionsGroup {
+            get {
+                return ResourceManager.GetString("ObfuscateOptionsGroup", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Package file:.
+        /// </summary>
+        internal static string ObfuscateInputFileLabel {
+            get {
+                return ResourceManager.GetString("ObfuscateInputFileLabel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Browse....
+        /// </summary>
+        internal static string ObfuscateBrowse {
+            get {
+                return ResourceManager.GetString("ObfuscateBrowse", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Use output directory.
+        /// </summary>
+        internal static string ObfuscateUseOutputDir {
+            get {
+                return ResourceManager.GetString("ObfuscateUseOutputDir", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Output directory:.
+        /// </summary>
+        internal static string ObfuscateOutputDirectoryLabel {
+            get {
+                return ResourceManager.GetString("ObfuscateOutputDirectoryLabel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Make package debuggable (--debug).
+        /// </summary>
+        internal static string ObfuscateDebug {
+            get {
+                return ResourceManager.GetString("ObfuscateDebug", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Disable app component factory (--disable-acf).
+        /// </summary>
+        internal static string ObfuscateDisableAcf {
+            get {
+                return ResourceManager.GetString("ObfuscateDisableAcf", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Dump code (--dump-code).
+        /// </summary>
+        internal static string ObfuscateDumpCode {
+            get {
+                return ResourceManager.GetString("ObfuscateDumpCode", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Enable noisy log (--noisy-log).
+        /// </summary>
+        internal static string ObfuscateNoisyLog {
+            get {
+                return ResourceManager.GetString("ObfuscateNoisyLog", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Optimize for smaller size (--smaller).
+        /// </summary>
+        internal static string ObfuscateSmaller {
+            get {
+                return ResourceManager.GetString("ObfuscateSmaller", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Do not sign package (--no-sign).
+        /// </summary>
+        internal static string ObfuscateNoSign {
+            get {
+                return ResourceManager.GetString("ObfuscateNoSign", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Keep classes (--keep-classes).
+        /// </summary>
+        internal static string ObfuscateKeepClasses {
+            get {
+                return ResourceManager.GetString("ObfuscateKeepClasses", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Exclude ABI list (comma separated):.
+        /// </summary>
+        internal static string ObfuscateExcludeAbiLabel {
+            get {
+                return ResourceManager.GetString("ObfuscateExcludeAbiLabel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Rules file:.
+        /// </summary>
+        internal static string ObfuscateRulesFileLabel {
+            get {
+                return ResourceManager.GetString("ObfuscateRulesFileLabel", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Obfuscate.
+        /// </summary>
+        internal static string ObfuscateButton {
+            get {
+                return ResourceManager.GetString("ObfuscateButton", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Obfuscating.
+        /// </summary>
+        internal static string Obfuscating {
+            get {
+                return ResourceManager.GetString("Obfuscating", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Obfuscation completed successfully..
+        /// </summary>
+        internal static string ObfuscateSuccessfullyCompleted {
+            get {
+                return ResourceManager.GetString("ObfuscateSuccessfullyCompleted", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Obfuscated package saved to "{0}"..
+        /// </summary>
+        internal static string ObfuscateOutputSavedTo {
+            get {
+                return ResourceManager.GetString("ObfuscateOutputSavedTo", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Input file not found. Please select a valid Android package..
+        /// </summary>
+        internal static string ObfuscateInputFileNotFound {
+            get {
+                return ResourceManager.GetString("ObfuscateInputFileNotFound", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Rules file not found. Please select a valid file..
+        /// </summary>
+        internal static string ObfuscateRulesFileNotFound {
+            get {
+                return ResourceManager.GetString("ObfuscateRulesFileNotFound", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Error obfuscating package..
+        /// </summary>
+        internal static string ErrorObfuscating {
+            get {
+                return ResourceManager.GetString("ErrorObfuscating", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   Looks up a localized string similar to APK Installation failed.
         /// </summary>

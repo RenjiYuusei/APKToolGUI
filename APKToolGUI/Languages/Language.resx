@@ -489,6 +489,78 @@
   <data name="DevicesFound" xml:space="preserve">
     <value>{0} devices found</value>
   </data>
+  <data name="ObfuscateTabTitle" xml:space="preserve">
+    <value>Obfuscate</value>
+  </data>
+  <data name="ObfuscateInputGroup" xml:space="preserve">
+    <value>Input</value>
+  </data>
+  <data name="ObfuscateOutputGroup" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="ObfuscateOptionsGroup" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="ObfuscateInputFileLabel" xml:space="preserve">
+    <value>Package file:</value>
+  </data>
+  <data name="ObfuscateBrowse" xml:space="preserve">
+    <value>Browse...</value>
+  </data>
+  <data name="ObfuscateUseOutputDir" xml:space="preserve">
+    <value>Use output directory</value>
+  </data>
+  <data name="ObfuscateOutputDirectoryLabel" xml:space="preserve">
+    <value>Output directory:</value>
+  </data>
+  <data name="ObfuscateDebug" xml:space="preserve">
+    <value>Make package debuggable (--debug)</value>
+  </data>
+  <data name="ObfuscateDisableAcf" xml:space="preserve">
+    <value>Disable app component factory (--disable-acf)</value>
+  </data>
+  <data name="ObfuscateDumpCode" xml:space="preserve">
+    <value>Dump code (--dump-code)</value>
+  </data>
+  <data name="ObfuscateNoisyLog" xml:space="preserve">
+    <value>Enable noisy log (--noisy-log)</value>
+  </data>
+  <data name="ObfuscateSmaller" xml:space="preserve">
+    <value>Optimize for smaller size (--smaller)</value>
+  </data>
+  <data name="ObfuscateNoSign" xml:space="preserve">
+    <value>Do not sign package (--no-sign)</value>
+  </data>
+  <data name="ObfuscateKeepClasses" xml:space="preserve">
+    <value>Keep classes (--keep-classes)</value>
+  </data>
+  <data name="ObfuscateExcludeAbiLabel" xml:space="preserve">
+    <value>Exclude ABI list (comma separated):</value>
+  </data>
+  <data name="ObfuscateRulesFileLabel" xml:space="preserve">
+    <value>Rules file:</value>
+  </data>
+  <data name="ObfuscateButton" xml:space="preserve">
+    <value>Obfuscate</value>
+  </data>
+  <data name="Obfuscating" xml:space="preserve">
+    <value>Obfuscating</value>
+  </data>
+  <data name="ObfuscateSuccessfullyCompleted" xml:space="preserve">
+    <value>Obfuscation completed successfully.</value>
+  </data>
+  <data name="ObfuscateOutputSavedTo" xml:space="preserve">
+    <value>Obfuscated package saved to "{0}".</value>
+  </data>
+  <data name="ObfuscateInputFileNotFound" xml:space="preserve">
+    <value>Input file not found. Please select a valid Android package.</value>
+  </data>
+  <data name="ObfuscateRulesFileNotFound" xml:space="preserve">
+    <value>Rules file not found. Please select a valid file.</value>
+  </data>
+  <data name="ErrorObfuscating" xml:space="preserve">
+    <value>Error obfuscating package.</value>
+  </data>
   <data name="InstallApkFailed" xml:space="preserve">
     <value>APK Installation failed</value>
   </data>

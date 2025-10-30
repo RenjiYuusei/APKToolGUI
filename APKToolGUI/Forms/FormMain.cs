@@ -31,6 +31,32 @@ namespace APKToolGUI
         internal Zipalign zipalign;
         internal UpdateChecker updateCheker;
         internal AaptParser aapt;
+        internal DptShell dptShell;
+
+        internal TabPage tabPageObfuscate;
+        internal GroupBox groupBox_OBF_Input;
+        internal Label label_OBF_InputFile;
+        internal TextBox textBox_OBF_InputFile;
+        internal Button button_OBF_BrowseInputFile;
+        internal GroupBox groupBox_OBF_Output;
+        internal CheckBox checkBox_OBF_UseOutputDir;
+        internal Label label_OBF_OutputDir;
+        internal TextBox textBox_OBF_OutputDir;
+        internal Button button_OBF_BrowseOutputDir;
+        internal GroupBox groupBox_OBF_Options;
+        internal CheckBox checkBox_OBF_Debug;
+        internal CheckBox checkBox_OBF_DisableAcf;
+        internal CheckBox checkBox_OBF_DumpCode;
+        internal CheckBox checkBox_OBF_NoisyLog;
+        internal CheckBox checkBox_OBF_Smaller;
+        internal CheckBox checkBox_OBF_NoSign;
+        internal CheckBox checkBox_OBF_KeepClasses;
+        internal Label label_OBF_ExcludeAbi;
+        internal TextBox textBox_OBF_ExcludeAbi;
+        internal Label label_OBF_RulesFile;
+        internal TextBox textBox_OBF_RulesFile;
+        internal Button button_OBF_BrowseRulesFile;
+        internal Button button_OBF_Obfuscate;
 
         private bool IgnoreOutputDirContextMenu;
         private bool isRunning;
@@ -49,6 +75,7 @@ namespace APKToolGUI
             Program.SetLanguage();
 
             InitializeComponent();
+            InitializeObfuscateTab();
 
             if (Program.IsDarkTheme())
                 DarkTheme.SetTheme(Controls, this);
@@ -102,6 +129,7 @@ namespace APKToolGUI
             new AdbControlEventHandlers(this);
             new DragDropHandlers(this);
             new ApkinfoControlEventHandlers(this);
+            new ObfuscateControlEventHandlers(this);
             new MainWindowEventHandlers(this);
             new MenuItemHandlers(this);
             new TaskBarJumpList(Handle);
@@ -174,6 +202,8 @@ namespace APKToolGUI
         {
             if (File.Exists(file))
             {
+                SetObfuscateInputFromSelection(file);
+
                 ToLog(ApktoolEventType.None, Language.ParsingApkInfo);
                 ToStatus(Language.ParsingApkInfo, Resources.waiting);
 
@@ -411,6 +441,314 @@ namespace APKToolGUI
 
             ToLog(ApktoolEventType.Infomation, "=====[ " + msg + " ]=====");
             ToStatus(msg, Resources.waiting);
+        }
+
+        private void InitializeObfuscateTab()
+        {
+            int groupWidth = Math.Max(tabControlMain.DisplayRectangle.Width - 12, 560);
+            int buttonWidth = 100;
+            int rightButtonX = groupWidth - buttonWidth - 10;
+            int obfuscateButtonWidth = Math.Min(Math.Max(buttonWidth, 160), groupWidth);
+            int obfuscateButtonX = Math.Max(6, 6 + groupWidth - obfuscateButtonWidth);
+            int textStartX = 150;
+            int textWidth = Math.Max(rightButtonX - textStartX - 6, 220);
+
+            tabPageObfuscate = new TabPage
+            {
+                Name = "tabPageObfuscate",
+                Padding = new Padding(3),
+                AutoScroll = true,
+                BackColor = Color.White,
+                UseVisualStyleBackColor = true,
+                Text = Language.ObfuscateTabTitle
+            };
+            tabPageObfuscate.AllowDrop = true;
+
+            groupBox_OBF_Input = new GroupBox
+            {
+                Name = "groupBox_OBF_Input",
+                Text = Language.ObfuscateInputGroup,
+                Location = new Point(6, 6),
+                Size = new Size(groupWidth, 72),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+            };
+
+            label_OBF_InputFile = new Label
+            {
+                Name = "label_OBF_InputFile",
+                AutoSize = true,
+                Location = new Point(9, 30),
+                Text = Language.ObfuscateInputFileLabel
+            };
+
+            textBox_OBF_InputFile = new TextBox
+            {
+                Name = "textBox_OBF_InputFile",
+                Location = new Point(textStartX, 27),
+                Size = new Size(textWidth, 23),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
+                AllowDrop = true
+            };
+            textBox_OBF_InputFile.DataBindings.Add(new Binding("Text", Settings.Default, nameof(Settings.Default.Obfuscate_InputFile), true, DataSourceUpdateMode.OnPropertyChanged));
+            textBox_OBF_InputFile.Text = Settings.Default.Obfuscate_InputFile;
+
+            button_OBF_BrowseInputFile = new Button
+            {
+                Name = "button_OBF_BrowseInputFile",
+                Location = new Point(rightButtonX, 25),
+                Size = new Size(buttonWidth, 27),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                Text = Language.ObfuscateBrowse,
+                UseVisualStyleBackColor = true
+            };
+
+            groupBox_OBF_Input.Controls.Add(label_OBF_InputFile);
+            groupBox_OBF_Input.Controls.Add(textBox_OBF_InputFile);
+            groupBox_OBF_Input.Controls.Add(button_OBF_BrowseInputFile);
+
+            groupBox_OBF_Output = new GroupBox
+            {
+                Name = "groupBox_OBF_Output",
+                Text = Language.ObfuscateOutputGroup,
+                Location = new Point(6, groupBox_OBF_Input.Bottom + 10),
+                Size = new Size(groupWidth, 96),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+            };
+
+            checkBox_OBF_UseOutputDir = new CheckBox
+            {
+                Name = "checkBox_OBF_UseOutputDir",
+                AutoSize = true,
+                Location = new Point(9, 25),
+                Text = Language.ObfuscateUseOutputDir
+            };
+            checkBox_OBF_UseOutputDir.DataBindings.Add(new Binding("Checked", Settings.Default, nameof(Settings.Default.Obfuscate_UseOutputDir), true, DataSourceUpdateMode.OnPropertyChanged));
+            checkBox_OBF_UseOutputDir.Checked = Settings.Default.Obfuscate_UseOutputDir;
+
+            label_OBF_OutputDir = new Label
+            {
+                Name = "label_OBF_OutputDir",
+                AutoSize = true,
+                Location = new Point(9, 58),
+                Text = Language.ObfuscateOutputDirectoryLabel
+            };
+
+            textBox_OBF_OutputDir = new TextBox
+            {
+                Name = "textBox_OBF_OutputDir",
+                Location = new Point(textStartX, 55),
+                Size = new Size(textWidth, 23),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+            };
+            textBox_OBF_OutputDir.DataBindings.Add(new Binding("Text", Settings.Default, nameof(Settings.Default.Obfuscate_OutputDir), true, DataSourceUpdateMode.OnPropertyChanged));
+            textBox_OBF_OutputDir.Text = Settings.Default.Obfuscate_OutputDir;
+
+            button_OBF_BrowseOutputDir = new Button
+            {
+                Name = "button_OBF_BrowseOutputDir",
+                Location = new Point(rightButtonX, 53),
+                Size = new Size(buttonWidth, 27),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                Text = Language.ObfuscateBrowse,
+                UseVisualStyleBackColor = true
+            };
+
+            groupBox_OBF_Output.Controls.Add(checkBox_OBF_UseOutputDir);
+            groupBox_OBF_Output.Controls.Add(label_OBF_OutputDir);
+            groupBox_OBF_Output.Controls.Add(textBox_OBF_OutputDir);
+            groupBox_OBF_Output.Controls.Add(button_OBF_BrowseOutputDir);
+
+            button_OBF_Obfuscate = new Button
+            {
+                Name = "button_OBF_Obfuscate",
+                Location = new Point(obfuscateButtonX, groupBox_OBF_Output.Bottom + 12),
+                Size = new Size(obfuscateButtonWidth, 32),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                Text = Language.ObfuscateButton,
+                UseVisualStyleBackColor = true
+            };
+            button_OBF_Obfuscate.AllowDrop = true;
+
+            groupBox_OBF_Options = new GroupBox
+            {
+                Name = "groupBox_OBF_Options",
+                Text = Language.ObfuscateOptionsGroup,
+                Location = new Point(6, button_OBF_Obfuscate.Bottom + 12),
+                Size = new Size(groupWidth, 230),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+            };
+
+            int secondColumnX = Math.Max(groupWidth / 2, 280);
+
+            checkBox_OBF_Debug = new CheckBox
+            {
+                Name = "checkBox_OBF_Debug",
+                AutoSize = true,
+                Location = new Point(9, 25),
+                Text = Language.ObfuscateDebug
+            };
+            checkBox_OBF_Debug.DataBindings.Add(new Binding("Checked", Settings.Default, nameof(Settings.Default.Obfuscate_Debug), true, DataSourceUpdateMode.OnPropertyChanged));
+            checkBox_OBF_Debug.Checked = Settings.Default.Obfuscate_Debug;
+
+            checkBox_OBF_DisableAcf = new CheckBox
+            {
+                Name = "checkBox_OBF_DisableAcf",
+                AutoSize = true,
+                Location = new Point(9, 50),
+                Text = Language.ObfuscateDisableAcf
+            };
+            checkBox_OBF_DisableAcf.DataBindings.Add(new Binding("Checked", Settings.Default, nameof(Settings.Default.Obfuscate_DisableAcf), true, DataSourceUpdateMode.OnPropertyChanged));
+            checkBox_OBF_DisableAcf.Checked = Settings.Default.Obfuscate_DisableAcf;
+
+            checkBox_OBF_DumpCode = new CheckBox
+            {
+                Name = "checkBox_OBF_DumpCode",
+                AutoSize = true,
+                Location = new Point(9, 75),
+                Text = Language.ObfuscateDumpCode
+            };
+            checkBox_OBF_DumpCode.DataBindings.Add(new Binding("Checked", Settings.Default, nameof(Settings.Default.Obfuscate_DumpCode), true, DataSourceUpdateMode.OnPropertyChanged));
+            checkBox_OBF_DumpCode.Checked = Settings.Default.Obfuscate_DumpCode;
+
+            checkBox_OBF_NoisyLog = new CheckBox
+            {
+                Name = "checkBox_OBF_NoisyLog",
+                AutoSize = true,
+                Location = new Point(9, 100),
+                Text = Language.ObfuscateNoisyLog
+            };
+            checkBox_OBF_NoisyLog.DataBindings.Add(new Binding("Checked", Settings.Default, nameof(Settings.Default.Obfuscate_NoisyLog), true, DataSourceUpdateMode.OnPropertyChanged));
+            checkBox_OBF_NoisyLog.Checked = Settings.Default.Obfuscate_NoisyLog;
+
+            checkBox_OBF_Smaller = new CheckBox
+            {
+                Name = "checkBox_OBF_Smaller",
+                AutoSize = true,
+                Location = new Point(9, 125),
+                Text = Language.ObfuscateSmaller
+            };
+            checkBox_OBF_Smaller.DataBindings.Add(new Binding("Checked", Settings.Default, nameof(Settings.Default.Obfuscate_Smaller), true, DataSourceUpdateMode.OnPropertyChanged));
+            checkBox_OBF_Smaller.Checked = Settings.Default.Obfuscate_Smaller;
+
+            checkBox_OBF_NoSign = new CheckBox
+            {
+                Name = "checkBox_OBF_NoSign",
+                AutoSize = true,
+                Location = new Point(secondColumnX, 25),
+                Text = Language.ObfuscateNoSign
+            };
+            checkBox_OBF_NoSign.DataBindings.Add(new Binding("Checked", Settings.Default, nameof(Settings.Default.Obfuscate_NoSign), true, DataSourceUpdateMode.OnPropertyChanged));
+            checkBox_OBF_NoSign.Checked = Settings.Default.Obfuscate_NoSign;
+
+            checkBox_OBF_KeepClasses = new CheckBox
+            {
+                Name = "checkBox_OBF_KeepClasses",
+                AutoSize = true,
+                Location = new Point(secondColumnX, 50),
+                Text = Language.ObfuscateKeepClasses
+            };
+            checkBox_OBF_KeepClasses.DataBindings.Add(new Binding("Checked", Settings.Default, nameof(Settings.Default.Obfuscate_KeepClasses), true, DataSourceUpdateMode.OnPropertyChanged));
+            checkBox_OBF_KeepClasses.Checked = Settings.Default.Obfuscate_KeepClasses;
+
+            label_OBF_ExcludeAbi = new Label
+            {
+                Name = "label_OBF_ExcludeAbi",
+                AutoSize = true,
+                Location = new Point(9, 155),
+                Text = Language.ObfuscateExcludeAbiLabel
+            };
+
+            textBox_OBF_ExcludeAbi = new TextBox
+            {
+                Name = "textBox_OBF_ExcludeAbi",
+                Location = new Point(textStartX, 152),
+                Size = new Size(textWidth, 23),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+            };
+            textBox_OBF_ExcludeAbi.DataBindings.Add(new Binding("Text", Settings.Default, nameof(Settings.Default.Obfuscate_ExcludeAbi), true, DataSourceUpdateMode.OnPropertyChanged));
+            textBox_OBF_ExcludeAbi.Text = Settings.Default.Obfuscate_ExcludeAbi;
+
+            label_OBF_RulesFile = new Label
+            {
+                Name = "label_OBF_RulesFile",
+                AutoSize = true,
+                Location = new Point(9, 185),
+                Text = Language.ObfuscateRulesFileLabel
+            };
+
+            textBox_OBF_RulesFile = new TextBox
+            {
+                Name = "textBox_OBF_RulesFile",
+                Location = new Point(textStartX, 182),
+                Size = new Size(textWidth, 23),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+            };
+            textBox_OBF_RulesFile.DataBindings.Add(new Binding("Text", Settings.Default, nameof(Settings.Default.Obfuscate_RulesFile), true, DataSourceUpdateMode.OnPropertyChanged));
+            textBox_OBF_RulesFile.Text = Settings.Default.Obfuscate_RulesFile;
+
+            button_OBF_BrowseRulesFile = new Button
+            {
+                Name = "button_OBF_BrowseRulesFile",
+                Location = new Point(rightButtonX, 180),
+                Size = new Size(buttonWidth, 27),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
+                Text = Language.ObfuscateBrowse,
+                UseVisualStyleBackColor = true
+            };
+
+            groupBox_OBF_Options.Controls.Add(checkBox_OBF_Debug);
+            groupBox_OBF_Options.Controls.Add(checkBox_OBF_DisableAcf);
+            groupBox_OBF_Options.Controls.Add(checkBox_OBF_DumpCode);
+            groupBox_OBF_Options.Controls.Add(checkBox_OBF_NoisyLog);
+            groupBox_OBF_Options.Controls.Add(checkBox_OBF_Smaller);
+            groupBox_OBF_Options.Controls.Add(checkBox_OBF_NoSign);
+            groupBox_OBF_Options.Controls.Add(checkBox_OBF_KeepClasses);
+            groupBox_OBF_Options.Controls.Add(label_OBF_ExcludeAbi);
+            groupBox_OBF_Options.Controls.Add(textBox_OBF_ExcludeAbi);
+            groupBox_OBF_Options.Controls.Add(label_OBF_RulesFile);
+            groupBox_OBF_Options.Controls.Add(textBox_OBF_RulesFile);
+            groupBox_OBF_Options.Controls.Add(button_OBF_BrowseRulesFile);
+
+            tabPageObfuscate.Controls.Add(groupBox_OBF_Input);
+            tabPageObfuscate.Controls.Add(groupBox_OBF_Output);
+            tabPageObfuscate.Controls.Add(button_OBF_Obfuscate);
+            tabPageObfuscate.Controls.Add(groupBox_OBF_Options);
+
+            int insertIndex = tabControlMain.TabPages.IndexOf(tabPageSign);
+            if (insertIndex < 0)
+                insertIndex = tabControlMain.TabPages.Count;
+            tabControlMain.TabPages.Insert(insertIndex, tabPageObfuscate);
+        }
+
+        internal void SetObfuscateInputFromSelection(string packagePath, bool updateOutputDirectory = true)
+        {
+            if (String.IsNullOrWhiteSpace(packagePath))
+                return;
+
+            if (!packagePath.EndsWith(".apk", StringComparison.OrdinalIgnoreCase))
+                return;
+
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action(() => SetObfuscateInputFromSelection(packagePath, updateOutputDirectory)));
+                return;
+            }
+
+            if (!String.Equals(textBox_OBF_InputFile.Text, packagePath, StringComparison.OrdinalIgnoreCase))
+                textBox_OBF_InputFile.Text = packagePath;
+
+            if (updateOutputDirectory)
+            {
+                string selectedDirectory = Path.GetDirectoryName(packagePath);
+                if (!String.IsNullOrWhiteSpace(selectedDirectory))
+                {
+                    bool outputMissing = String.IsNullOrWhiteSpace(textBox_OBF_OutputDir.Text) ||
+                        !Directory.Exists(textBox_OBF_OutputDir.Text);
+
+                    if (outputMissing)
+                        textBox_OBF_OutputDir.Text = selectedDirectory;
+                }
+            }
         }
 
         internal void Done(string msg = null)
@@ -1171,6 +1509,113 @@ namespace APKToolGUI
         }
         #endregion
 
+        #region DPT Shell
+        private void InitializeDptShell()
+        {
+            string jarPath = Program.DPT_PATH;
+            string shellFilesPath = Program.DptShellFilesPath;
+            bool hasShellFiles = Directory.Exists(shellFilesPath) && Directory.EnumerateFileSystemEntries(shellFilesPath).Any();
+
+            if (!File.Exists(jarPath) || !hasShellFiles)
+            {
+                const string message = "dpt-shell resources not found. Please place dpt.jar and the shell-files directory into the Resources folder.";
+
+                ToLog(ApktoolEventType.Error, message);
+                BeginInvoke(new Action(() =>
+                {
+                    tabPageObfuscate.Enabled = false;
+                    ShowMessage(message, MessageBoxIcon.Error);
+                }));
+                return;
+            }
+
+            dptShell = new DptShell(javaPath, jarPath);
+            dptShell.DptShellOutputDataReceived += DptShell_OutputDataReceived;
+            dptShell.DptShellErrorDataReceived += DptShell_ErrorDataReceived;
+
+            BeginInvoke(new Action(() =>
+            {
+                if (!tabPageObfuscate.Enabled)
+                    tabPageObfuscate.Enabled = true;
+            }));
+        }
+
+        private void DptShell_ErrorDataReceived(object sender, DptShellDataReceivedEventArgs e)
+        {
+            ToLog(ApktoolEventType.Error, e.Message);
+        }
+
+        private void DptShell_OutputDataReceived(object sender, DptShellDataReceivedEventArgs e)
+        {
+            ToLog(ApktoolEventType.None, e.Message);
+        }
+
+        internal async Task<int> Obfuscate(string inputFile)
+        {
+            int code = 0;
+
+            if (dptShell == null)
+            {
+                ShowMessage(Language.ErrorJavaDetect, MessageBoxIcon.Error);
+                return 1;
+            }
+
+            Running(Language.Obfuscating);
+            ToLog(ApktoolEventType.None, string.Format(Language.InputFile, inputFile));
+
+            string outputDirectory = null;
+            if (Settings.Default.Obfuscate_UseOutputDir && !IgnoreOutputDirContextMenu)
+            {
+                if (!string.IsNullOrWhiteSpace(Settings.Default.Obfuscate_OutputDir))
+                {
+                    outputDirectory = Settings.Default.Obfuscate_OutputDir;
+                    Directory.CreateDirectory(outputDirectory);
+                }
+            }
+
+            DptShellOptions options = new DptShellOptions
+            {
+                Debug = Settings.Default.Obfuscate_Debug,
+                DisableAcf = Settings.Default.Obfuscate_DisableAcf,
+                DumpCode = Settings.Default.Obfuscate_DumpCode,
+                NoisyLog = Settings.Default.Obfuscate_NoisyLog,
+                Smaller = Settings.Default.Obfuscate_Smaller,
+                NoSign = Settings.Default.Obfuscate_NoSign,
+                KeepClasses = Settings.Default.Obfuscate_KeepClasses,
+                ExcludeAbi = Settings.Default.Obfuscate_ExcludeAbi,
+                RulesFile = Settings.Default.Obfuscate_RulesFile
+            };
+
+            try
+            {
+                await Task.Factory.StartNew(() =>
+                {
+                    code = dptShell.Obfuscate(inputFile, outputDirectory, options);
+
+                    if (code == 0)
+                    {
+                        if (!string.IsNullOrWhiteSpace(outputDirectory))
+                            ToLog(ApktoolEventType.None, string.Format(Language.ObfuscateOutputSavedTo, outputDirectory));
+
+                        ToLog(ApktoolEventType.None, Language.ObfuscateSuccessfullyCompleted);
+                        Done();
+                    }
+                    else
+                    {
+                        Error(Language.ErrorObfuscating);
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                code = 1;
+            }
+
+            return code;
+        }
+        #endregion
+
         #region Signapk
         private void InitializeSignapk()
         {
@@ -1391,6 +1836,7 @@ namespace APKToolGUI
                     InitializeAPKTool();
                     InitializeSignapk();
                     InitializeApkEditor();
+                    InitializeDptShell();
 
                     string javaVersion = apktool.GetJavaVersion();
                     if (javaVersion != null)
@@ -1423,6 +1869,7 @@ namespace APKToolGUI
                         tabPageMain.Enabled = false;
                         tabPageBaksmali.Enabled = false;
                         tabPageInstallFramework.Enabled = false;
+                        tabPageObfuscate.Enabled = false;
                     }));
                 }
 
@@ -1549,6 +1996,17 @@ namespace APKToolGUI
                 else
                     comSmaliBtn.Enabled = value;
 
+                if (button_OBF_Obfuscate != null)
+                {
+                    if (button_OBF_Obfuscate.InvokeRequired)
+                        button_OBF_Obfuscate.BeginInvoke(new Action(delegate
+                        {
+                            button_OBF_Obfuscate.Enabled = value;
+                        }));
+                    else
+                        button_OBF_Obfuscate.Enabled = value;
+                }
+
                 if (mergeApkBtn.InvokeRequired)
                     mergeApkBtn.BeginInvoke(new Action(delegate
                     {
@@ -1619,6 +2077,7 @@ namespace APKToolGUI
                 smali.Cancel();
                 zipalign.Cancel();
                 signapk.Cancel();
+                dptShell?.Cancel();
             }
             catch (Exception ex)
             {

@@ -489,6 +489,78 @@
   <data name="DevicesFound" xml:space="preserve">
     <value>{0} cihaz bulundu</value>
   </data>
+  <data name="ObfuscateTabTitle" xml:space="preserve">
+    <value>Karmaşıklaştır</value>
+  </data>
+  <data name="ObfuscateInputGroup" xml:space="preserve">
+    <value>Girdi</value>
+  </data>
+  <data name="ObfuscateOutputGroup" xml:space="preserve">
+    <value>Çıktı</value>
+  </data>
+  <data name="ObfuscateOptionsGroup" xml:space="preserve">
+    <value>Seçenekler</value>
+  </data>
+  <data name="ObfuscateInputFileLabel" xml:space="preserve">
+    <value>Paket dosyası:</value>
+  </data>
+  <data name="ObfuscateBrowse" xml:space="preserve">
+    <value>Gözat...</value>
+  </data>
+  <data name="ObfuscateUseOutputDir" xml:space="preserve">
+    <value>Çıktı klasörünü kullan</value>
+  </data>
+  <data name="ObfuscateOutputDirectoryLabel" xml:space="preserve">
+    <value>Çıktı klasörü:</value>
+  </data>
+  <data name="ObfuscateDebug" xml:space="preserve">
+    <value>Paketi hata ayıklanabilir yap (--debug)</value>
+  </data>
+  <data name="ObfuscateDisableAcf" xml:space="preserve">
+    <value>Uygulama bileşen fabrikasını devre dışı bırak (--disable-acf)</value>
+  </data>
+  <data name="ObfuscateDumpCode" xml:space="preserve">
+    <value>Kodu dök (--dump-code)</value>
+  </data>
+  <data name="ObfuscateNoisyLog" xml:space="preserve">
+    <value>Ayrıntılı günlüğü etkinleştir (--noisy-log)</value>
+  </data>
+  <data name="ObfuscateSmaller" xml:space="preserve">
+    <value>Daha küçük boyut için optimize et (--smaller)</value>
+  </data>
+  <data name="ObfuscateNoSign" xml:space="preserve">
+    <value>Paketi imzalama (--no-sign)</value>
+  </data>
+  <data name="ObfuscateKeepClasses" xml:space="preserve">
+    <value>Sınıfları koru (--keep-classes)</value>
+  </data>
+  <data name="ObfuscateExcludeAbiLabel" xml:space="preserve">
+    <value>Hariç tutulacak ABI listesi (virgülle ayrılmış):</value>
+  </data>
+  <data name="ObfuscateRulesFileLabel" xml:space="preserve">
+    <value>Kural dosyası:</value>
+  </data>
+  <data name="ObfuscateButton" xml:space="preserve">
+    <value>Karmaşıklaştır</value>
+  </data>
+  <data name="Obfuscating" xml:space="preserve">
+    <value>Karmaşıklaştırılıyor</value>
+  </data>
+  <data name="ObfuscateSuccessfullyCompleted" xml:space="preserve">
+    <value>Karmaşıklaştırma başarıyla tamamlandı.</value>
+  </data>
+  <data name="ObfuscateOutputSavedTo" xml:space="preserve">
+    <value>Karmaşıklaştırılmış paket "{0}" konumuna kaydedildi.</value>
+  </data>
+  <data name="ObfuscateInputFileNotFound" xml:space="preserve">
+    <value>Girdi dosyası bulunamadı. Lütfen geçerli bir Android paketi seçin.</value>
+  </data>
+  <data name="ObfuscateRulesFileNotFound" xml:space="preserve">
+    <value>Kural dosyası bulunamadı. Lütfen geçerli bir dosya seçin.</value>
+  </data>
+  <data name="ErrorObfuscating" xml:space="preserve">
+    <value>Paket karmaşıklaştırılırken hata oluştu.</value>
+  </data>
   <data name="InstallApkFailed" xml:space="preserve">
     <value>APK Kurulumu başarısız</value>
   </data>
