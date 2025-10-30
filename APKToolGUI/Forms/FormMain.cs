@@ -202,6 +202,8 @@ namespace APKToolGUI
         {
             if (File.Exists(file))
             {
+                SetObfuscateInputFromSelection(file);
+
                 ToLog(ApktoolEventType.None, Language.ParsingApkInfo);
                 ToStatus(Language.ParsingApkInfo, Resources.waiting);
 
@@ -446,6 +448,8 @@ namespace APKToolGUI
             int groupWidth = Math.Max(tabControlMain.DisplayRectangle.Width - 12, 560);
             int buttonWidth = 100;
             int rightButtonX = groupWidth - buttonWidth - 10;
+            int obfuscateButtonWidth = Math.Min(Math.Max(buttonWidth, 160), groupWidth);
+            int obfuscateButtonX = Math.Max(6, 6 + groupWidth - obfuscateButtonWidth);
             int textStartX = 150;
             int textWidth = Math.Max(rightButtonX - textStartX - 6, 220);
 
@@ -557,9 +561,9 @@ namespace APKToolGUI
             button_OBF_Obfuscate = new Button
             {
                 Name = "button_OBF_Obfuscate",
-                Location = new Point(6, groupBox_OBF_Output.Bottom + 12),
-                Size = new Size(groupWidth, 32),
-                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
+                Location = new Point(obfuscateButtonX, groupBox_OBF_Output.Bottom + 12),
+                Size = new Size(obfuscateButtonWidth, 32),
+                Anchor = AnchorStyles.Top | AnchorStyles.Right,
                 Text = Language.ObfuscateButton,
                 UseVisualStyleBackColor = true
             };
@@ -714,6 +718,37 @@ namespace APKToolGUI
             if (insertIndex < 0)
                 insertIndex = tabControlMain.TabPages.Count;
             tabControlMain.TabPages.Insert(insertIndex, tabPageObfuscate);
+        }
+
+        internal void SetObfuscateInputFromSelection(string packagePath, bool updateOutputDirectory = true)
+        {
+            if (String.IsNullOrWhiteSpace(packagePath))
+                return;
+
+            if (!packagePath.EndsWith(".apk", StringComparison.OrdinalIgnoreCase))
+                return;
+
+            if (InvokeRequired)
+            {
+                BeginInvoke(new Action(() => SetObfuscateInputFromSelection(packagePath, updateOutputDirectory)));
+                return;
+            }
+
+            if (!String.Equals(textBox_OBF_InputFile.Text, packagePath, StringComparison.OrdinalIgnoreCase))
+                textBox_OBF_InputFile.Text = packagePath;
+
+            if (updateOutputDirectory)
+            {
+                string selectedDirectory = Path.GetDirectoryName(packagePath);
+                if (!String.IsNullOrWhiteSpace(selectedDirectory))
+                {
+                    bool outputMissing = String.IsNullOrWhiteSpace(textBox_OBF_OutputDir.Text) ||
+                        !Directory.Exists(textBox_OBF_OutputDir.Text);
+
+                    if (outputMissing)
+                        textBox_OBF_OutputDir.Text = selectedDirectory;
+                }
+            }
         }
 
         internal void Done(string msg = null)
@@ -1477,9 +1512,30 @@ namespace APKToolGUI
         #region DPT Shell
         private void InitializeDptShell()
         {
+            bool resourcesReady = DptShellResourceManager.EnsureResources(
+                message => ToLog(ApktoolEventType.Infomation, message),
+                message => ToLog(ApktoolEventType.Error, message));
+
+            if (!resourcesReady)
+            {
+                ToLog(ApktoolEventType.Error, "Unable to prepare dpt-shell resources. Please download the latest release and place it inside the Resources folder.");
+                BeginInvoke(new Action(() =>
+                {
+                    tabPageObfuscate.Enabled = false;
+                    ShowMessage("Unable to prepare dpt-shell resources. Please ensure you have an internet connection or place the dpt-shell release into the Resources folder.", MessageBoxIcon.Error);
+                }));
+                return;
+            }
+
             dptShell = new DptShell(javaPath, Program.DPT_PATH);
             dptShell.DptShellOutputDataReceived += DptShell_OutputDataReceived;
             dptShell.DptShellErrorDataReceived += DptShell_ErrorDataReceived;
+
+            BeginInvoke(new Action(() =>
+            {
+                if (!tabPageObfuscate.Enabled)
+                    tabPageObfuscate.Enabled = true;
+            }));
         }
 
         private void DptShell_ErrorDataReceived(object sender, DptShellDataReceivedEventArgs e)

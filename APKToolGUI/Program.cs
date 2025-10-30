@@ -76,6 +76,8 @@ namespace APKToolGUI
                 }
                 else
                 {
+                    DptShellResourceManager.EnsureResources();
+
                     if (arg.Length == 2)
                     {
                         switch (arg[0])
@@ -270,6 +272,7 @@ namespace APKToolGUI
         public static string AAPT2_PATH { get { return Path.Combine(RES_PATH, "aapt2.exe"); } }
         public static string APKEDITOR_PATH { get { return Path.Combine(RES_PATH, "apkeditor.jar"); } }
         public static string DPT_PATH { get { return Path.Combine(RES_PATH, "dpt.jar"); } }
+        public static string DptShellFilesPath { get { return Path.Combine(RES_PATH, "shell-files"); } }
         public static string ADB_PATH { get { return Path.Combine(RES_PATH, "adb.exe"); } }
         public static string ADBWINAPI_PATH { get { return Path.Combine(RES_PATH, "AdbWinApi.dll"); } }
         public static string ADBWINUSBAPI_PATH { get { return Path.Combine(RES_PATH, "AdbWinUsbApi.dll"); } }

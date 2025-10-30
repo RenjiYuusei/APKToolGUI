@@ -334,6 +334,7 @@
     <Compile Include="Utils\CMD.cs" />
     <Compile Include="Utils\CommonUtils.cs" />
     <Compile Include="Utils\DirectoryUtils.cs" />
+    <Compile Include="Utils\DptShellResourceManager.cs" />
     <Compile Include="Utils\DragDropUtils.cs" />
     <Compile Include="Utils\ExplorerContextMenu.cs" />
     <Compile Include="Forms\FormAboutBox.cs">

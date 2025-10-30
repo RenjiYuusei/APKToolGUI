@@ -94,6 +94,7 @@ namespace APKToolGUI.Handlers
                 foreach (var apkFile in apkFiles)
                 {
                     main.textBox_DECODE_InputAppPath.Text = apkFile;
+                    main.SetObfuscateInputFromSelection(apkFile);
 
                     if (!Settings.Default.Decode_DontParseApkInfo)
                         await main.GetApkInfo(apkFile);
@@ -231,6 +232,7 @@ namespace APKToolGUI.Handlers
                 main.smaliBrowseInputDirTxtBox.Text = apkFile;
                 main.basicInfoTabPage.BackColor = PanelBackColor();
                 main.GetApkInfo(apkFile);
+                main.SetObfuscateInputFromSelection(apkFile);
             }
         }
 
