@@ -314,6 +314,8 @@
     </Compile>
     <Compile Include="ApkTool\Adb.cs" />
     <Compile Include="ApkTool\Zipalign.cs" />
+    <Compile Include="ApkTool\DptShell.cs" />
+    <Compile Include="ApkTool\DptShellDownloader.cs" />
     <Compile Include="Handlers\AdbControlEventHandlers.cs" />
     <Compile Include="Handlers\ApkinfoControlEventHandlers.cs" />
     <Compile Include="Handlers\BaksmaliControlEventHandlers.cs" />

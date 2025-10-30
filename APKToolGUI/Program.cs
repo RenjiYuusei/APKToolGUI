@@ -272,6 +272,7 @@ namespace APKToolGUI
         public static string ADBWINAPI_PATH { get { return Path.Combine(RES_PATH, "AdbWinApi.dll"); } }
         public static string ADBWINUSBAPI_PATH { get { return Path.Combine(RES_PATH, "AdbWinUsbApi.dll"); } }
         public static string LIBWINP_PATH { get { return Path.Combine(RES_PATH, "libwinpthread-1.dll"); } }
+        public static string DPTSHELL_PATH { get { return Path.Combine(RES_PATH, "dpt-shell.jar"); } }
         public static string FRAMEWORK_DIR { get { return Path.Combine(LOCAL_APPDATA_PATH, "apktool", "framework"); } }
         public static string STANDALONE_FRAMEWORK_DIR { get { return Path.Combine(LOCAL_APPDATA_PATH, ASSEMBLY_NAME, "framework"); } }
     }

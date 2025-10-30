@@ -1294,6 +1294,54 @@ namespace APKToolGUI.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Obfuscate_ToolPath {
+            get {
+                return ((string)(this["Obfuscate_ToolPath"]));
+            }
+            set {
+                this["Obfuscate_ToolPath"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Obfuscate_InputFile {
+            get {
+                return ((string)(this["Obfuscate_InputFile"]));
+            }
+            set {
+                this["Obfuscate_InputFile"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Obfuscate_OutputFile {
+            get {
+                return ((string)(this["Obfuscate_OutputFile"]));
+            }
+            set {
+                this["Obfuscate_OutputFile"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("obfuscate -i \"{input}\" -o \"{output}\"")]
+        public string Obfuscate_CommandTemplate {
+            get {
+                return ((string)(this["Obfuscate_CommandTemplate"]));
+            }
+            set {
+                this["Obfuscate_CommandTemplate"] = value;
+            }
+        }
+
         public bool UseApkeditor {
             get {
                 return ((bool)(this["UseApkeditor"]));

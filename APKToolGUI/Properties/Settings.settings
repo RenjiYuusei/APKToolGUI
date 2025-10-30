@@ -275,6 +275,18 @@
     <Setting Name="SplitApk_InputFile" Provider="Bluegrams.Application.PortableSettingsProvider" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="Obfuscate_ToolPath" Provider="Bluegrams.Application.PortableSettingsProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Obfuscate_InputFile" Provider="Bluegrams.Application.PortableSettingsProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Obfuscate_OutputFile" Provider="Bluegrams.Application.PortableSettingsProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Obfuscate_CommandTemplate" Provider="Bluegrams.Application.PortableSettingsProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">obfuscate -i "{input}" -o "{output}"</Value>
+    </Setting>
     <Setting Name="UseApkeditor" Provider="Bluegrams.Application.PortableSettingsProvider" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>

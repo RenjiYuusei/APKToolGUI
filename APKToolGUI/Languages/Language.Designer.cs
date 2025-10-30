@@ -1337,5 +1337,107 @@ namespace APKToolGUI.Languages {
                 return ResourceManager.GetString("ZIPArchives", resourceCulture);
             }
         }
+        internal static string Browse {
+            get {
+                return ResourceManager.GetString("Browse", resourceCulture);
+            }
+        }
+
+        internal static string Obfuscate {
+            get {
+                return ResourceManager.GetString("Obfuscate", resourceCulture);
+            }
+        }
+
+        internal static string Obfuscating {
+            get {
+                return ResourceManager.GetString("Obfuscating", resourceCulture);
+            }
+        }
+
+        internal static string ObfuscateToolPath {
+            get {
+                return ResourceManager.GetString("ObfuscateToolPath", resourceCulture);
+            }
+        }
+
+        internal static string ObfuscateInputApk {
+            get {
+                return ResourceManager.GetString("ObfuscateInputApk", resourceCulture);
+            }
+        }
+
+        internal static string ObfuscateOutputApk {
+            get {
+                return ResourceManager.GetString("ObfuscateOutputApk", resourceCulture);
+            }
+        }
+
+        internal static string ObfuscateCommandTemplate {
+            get {
+                return ResourceManager.GetString("ObfuscateCommandTemplate", resourceCulture);
+            }
+        }
+
+        internal static string WarningFileForObfuscationNotSelected {
+            get {
+                return ResourceManager.GetString("WarningFileForObfuscationNotSelected", resourceCulture);
+            }
+        }
+
+        internal static string ObfuscateToolMissing {
+            get {
+                return ResourceManager.GetString("ObfuscateToolMissing", resourceCulture);
+            }
+        }
+
+        internal static string ObfuscateCommandTemplateInvalid {
+            get {
+                return ResourceManager.GetString("ObfuscateCommandTemplateInvalid", resourceCulture);
+            }
+        }
+
+        internal static string ObfuscateDownloadingTool {
+            get {
+                return ResourceManager.GetString("ObfuscateDownloadingTool", resourceCulture);
+            }
+        }
+
+        internal static string ObfuscateDownloadSucceeded {
+            get {
+                return ResourceManager.GetString("ObfuscateDownloadSucceeded", resourceCulture);
+            }
+        }
+
+        internal static string ObfuscateDownloadFailed {
+            get {
+                return ResourceManager.GetString("ObfuscateDownloadFailed", resourceCulture);
+            }
+        }
+
+        internal static string ObfuscateDownloadArchiveMissingJar {
+            get {
+                return ResourceManager.GetString("ObfuscateDownloadArchiveMissingJar", resourceCulture);
+            }
+        }
+
+        internal static string ObfuscationCompleted {
+            get {
+                return ResourceManager.GetString("ObfuscationCompleted", resourceCulture);
+            }
+        }
+
+        internal static string ErrorObfuscating {
+            get {
+                return ResourceManager.GetString("ErrorObfuscating", resourceCulture);
+            }
+        }
+
+        internal static string ObfuscateOutputTarget {
+            get {
+                return ResourceManager.GetString("ObfuscateOutputTarget", resourceCulture);
+            }
+        }
+
     }
 }

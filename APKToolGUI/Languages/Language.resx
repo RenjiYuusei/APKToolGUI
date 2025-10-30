@@ -543,4 +543,55 @@
   <data name="SetLanguageRestartApplication" xml:space="preserve">
     <value />
   </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Browse</value>
+  </data>
+  <data name="Obfuscate" xml:space="preserve">
+    <value>Obfuscate</value>
+  </data>
+  <data name="Obfuscating" xml:space="preserve">
+    <value>Obfuscating</value>
+  </data>
+  <data name="ObfuscateToolPath" xml:space="preserve">
+    <value>dpt-shell path</value>
+  </data>
+  <data name="ObfuscateInputApk" xml:space="preserve">
+    <value>Input APK</value>
+  </data>
+  <data name="ObfuscateOutputApk" xml:space="preserve">
+    <value>Output APK</value>
+  </data>
+  <data name="ObfuscateCommandTemplate" xml:space="preserve">
+    <value>Command template</value>
+  </data>
+  <data name="WarningFileForObfuscationNotSelected" xml:space="preserve">
+    <value>Select an APK to obfuscate.</value>
+  </data>
+  <data name="ObfuscateToolMissing" xml:space="preserve">
+    <value>dpt-shell executable was not found at '{0}'. Please configure the correct path.</value>
+  </data>
+  <data name="ObfuscateCommandTemplateInvalid" xml:space="preserve">
+    <value>Command template for dpt-shell is invalid.</value>
+  </data>
+  <data name="ObfuscateDownloadingTool" xml:space="preserve">
+    <value>Downloading dpt-shell obfuscation tool from {0}...</value>
+  </data>
+  <data name="ObfuscateDownloadSucceeded" xml:space="preserve">
+    <value>dpt-shell obfuscation tool downloaded to '{0}'.</value>
+  </data>
+  <data name="ObfuscateDownloadFailed" xml:space="preserve">
+    <value>Failed to download dpt-shell obfuscation tool: {0}</value>
+  </data>
+  <data name="ObfuscateDownloadArchiveMissingJar" xml:space="preserve">
+    <value>Unable to locate dpt-shell jar in downloaded archive.</value>
+  </data>
+  <data name="ObfuscationCompleted" xml:space="preserve">
+    <value>Obfuscation completed. Output saved to {0}</value>
+  </data>
+  <data name="ErrorObfuscating" xml:space="preserve">
+    <value>Error while obfuscating APK.</value>
+  </data>
+  <data name="ObfuscateOutputTarget" xml:space="preserve">
+    <value>Output APK: {0}</value>
+  </data>
 </root>

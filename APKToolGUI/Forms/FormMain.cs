@@ -29,6 +29,7 @@ namespace APKToolGUI
         internal Baksmali baksmali;
         internal Smali smali;
         internal Zipalign zipalign;
+        internal DptShell dptShell;
         internal UpdateChecker updateCheker;
         internal AaptParser aapt;
 
@@ -42,6 +43,21 @@ namespace APKToolGUI
 
         internal static FormMain Instance { get; private set; }
 
+        internal TabPage tabPageObfuscate;
+        internal TextBox textBox_OBFUSCATE_ToolPath;
+        internal TextBox textBox_OBFUSCATE_InputFile;
+        internal TextBox textBox_OBFUSCATE_OutputFile;
+        internal TextBox textBox_OBFUSCATE_CommandTemplate;
+        internal Button button_OBFUSCATE_BrowseTool;
+        internal Button button_OBFUSCATE_BrowseInputFile;
+        internal Button button_OBFUSCATE_BrowseOutputFile;
+        internal Button button_OBFUSCATE_Run;
+        internal Label label_OBFUSCATE_ToolPath;
+        internal Label label_OBFUSCATE_InputFile;
+        internal Label label_OBFUSCATE_OutputFile;
+        internal Label label_OBFUSCATE_CommandTemplate;
+        private TableLayoutPanel obfuscateLayout;
+
         public FormMain()
         {
             Instance = this;
@@ -49,6 +65,8 @@ namespace APKToolGUI
             Program.SetLanguage();
 
             InitializeComponent();
+
+            InitializeObfuscateTab();
 
             if (Program.IsDarkTheme())
                 DarkTheme.SetTheme(Controls, this);
@@ -64,6 +82,15 @@ namespace APKToolGUI
                 Settings.Default.Sign_InputFile = "";
             if (!File.Exists(Settings.Default.Zipalign_InputFile))
                 Settings.Default.Zipalign_InputFile = "";
+
+            if (!File.Exists(Settings.Default.Obfuscate_InputFile))
+                Settings.Default.Obfuscate_InputFile = "";
+            if (!File.Exists(Settings.Default.Obfuscate_OutputFile))
+                Settings.Default.Obfuscate_OutputFile = "";
+            if (!File.Exists(Settings.Default.Obfuscate_ToolPath))
+                Settings.Default.Obfuscate_ToolPath = "";
+            if (String.IsNullOrWhiteSpace(Settings.Default.Obfuscate_CommandTemplate))
+                Settings.Default.Obfuscate_CommandTemplate = "obfuscate -i \"{input}\" -o \"{output}\"";
 
             if (!File.Exists(Settings.Default.Sign_PrivateKey) || String.IsNullOrEmpty(Settings.Default.Sign_PrivateKey))
                 Settings.Default.Sign_PrivateKey = Program.SIGNAPK_KEYPRIVATE;
@@ -96,6 +123,7 @@ namespace APKToolGUI
             new BuildControlEventHandlers(this);
             new SignControlEventHandlers(this);
             new ZipalignControlEventHandlers(this);
+            new ObfuscateControlEventHandlers(this);
             new FrameworkControlEventHandlers(this);
             new BaksmaliControlEventHandlers(this);
             new SmaliControlEventHandlers(this);
@@ -105,6 +133,139 @@ namespace APKToolGUI
             new MainWindowEventHandlers(this);
             new MenuItemHandlers(this);
             new TaskBarJumpList(Handle);
+        }
+
+        private void InitializeObfuscateTab()
+        {
+            tabPageObfuscate = new TabPage(Language.Obfuscate)
+            {
+                Name = "tabPageObfuscate",
+                BackColor = Color.White,
+                Padding = new Padding(10),
+                AutoScroll = true
+            };
+            tabPageObfuscate.AllowDrop = true;
+
+            obfuscateLayout = new TableLayoutPanel
+            {
+                ColumnCount = 3,
+                Dock = DockStyle.Top,
+                AutoSize = true,
+                AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                Padding = new Padding(0),
+                Name = "obfuscateLayout"
+            };
+            obfuscateLayout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            obfuscateLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            obfuscateLayout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+
+            label_OBFUSCATE_ToolPath = new Label
+            {
+                Text = Language.ObfuscateToolPath,
+                Anchor = AnchorStyles.Left,
+                AutoSize = true,
+                Margin = new Padding(0, 8, 8, 8)
+            };
+            textBox_OBFUSCATE_ToolPath = new TextBox
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Margin = new Padding(0, 5, 8, 5)
+            };
+            textBox_OBFUSCATE_ToolPath.DataBindings.Add(new Binding("Text", Settings.Default, nameof(Settings.Obfuscate_ToolPath), true, DataSourceUpdateMode.OnPropertyChanged));
+            button_OBFUSCATE_BrowseTool = new Button
+            {
+                Text = Language.Browse,
+                AutoSize = true,
+                Anchor = AnchorStyles.Right,
+                Margin = new Padding(0, 3, 0, 3)
+            };
+
+            label_OBFUSCATE_InputFile = new Label
+            {
+                Text = Language.ObfuscateInputApk,
+                Anchor = AnchorStyles.Left,
+                AutoSize = true,
+                Margin = new Padding(0, 8, 8, 8)
+            };
+            textBox_OBFUSCATE_InputFile = new TextBox
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Margin = new Padding(0, 5, 8, 5)
+            };
+            textBox_OBFUSCATE_InputFile.DataBindings.Add(new Binding("Text", Settings.Default, nameof(Settings.Obfuscate_InputFile), true, DataSourceUpdateMode.OnPropertyChanged));
+            button_OBFUSCATE_BrowseInputFile = new Button
+            {
+                Text = Language.Browse,
+                AutoSize = true,
+                Anchor = AnchorStyles.Right,
+                Margin = new Padding(0, 3, 0, 3)
+            };
+
+            label_OBFUSCATE_OutputFile = new Label
+            {
+                Text = Language.ObfuscateOutputApk,
+                Anchor = AnchorStyles.Left,
+                AutoSize = true,
+                Margin = new Padding(0, 8, 8, 8)
+            };
+            textBox_OBFUSCATE_OutputFile = new TextBox
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Margin = new Padding(0, 5, 8, 5)
+            };
+            textBox_OBFUSCATE_OutputFile.DataBindings.Add(new Binding("Text", Settings.Default, nameof(Settings.Obfuscate_OutputFile), true, DataSourceUpdateMode.OnPropertyChanged));
+            button_OBFUSCATE_BrowseOutputFile = new Button
+            {
+                Text = Language.Browse,
+                AutoSize = true,
+                Anchor = AnchorStyles.Right,
+                Margin = new Padding(0, 3, 0, 3)
+            };
+
+            label_OBFUSCATE_CommandTemplate = new Label
+            {
+                Text = Language.ObfuscateCommandTemplate,
+                Anchor = AnchorStyles.Left,
+                AutoSize = true,
+                Margin = new Padding(0, 8, 8, 8)
+            };
+            textBox_OBFUSCATE_CommandTemplate = new TextBox
+            {
+                Anchor = AnchorStyles.Left | AnchorStyles.Right,
+                Margin = new Padding(0, 5, 8, 5)
+            };
+            textBox_OBFUSCATE_CommandTemplate.DataBindings.Add(new Binding("Text", Settings.Default, nameof(Settings.Obfuscate_CommandTemplate), true, DataSourceUpdateMode.OnPropertyChanged));
+
+            button_OBFUSCATE_Run = new Button
+            {
+                Text = Language.Obfuscate,
+                Anchor = AnchorStyles.Right,
+                AutoSize = true,
+                Margin = new Padding(0, 15, 0, 0)
+            };
+
+            obfuscateLayout.Controls.Add(label_OBFUSCATE_ToolPath, 0, 0);
+            obfuscateLayout.Controls.Add(textBox_OBFUSCATE_ToolPath, 1, 0);
+            obfuscateLayout.Controls.Add(button_OBFUSCATE_BrowseTool, 2, 0);
+            obfuscateLayout.Controls.Add(label_OBFUSCATE_InputFile, 0, 1);
+            obfuscateLayout.Controls.Add(textBox_OBFUSCATE_InputFile, 1, 1);
+            obfuscateLayout.Controls.Add(button_OBFUSCATE_BrowseInputFile, 2, 1);
+            obfuscateLayout.Controls.Add(label_OBFUSCATE_OutputFile, 0, 2);
+            obfuscateLayout.Controls.Add(textBox_OBFUSCATE_OutputFile, 1, 2);
+            obfuscateLayout.Controls.Add(button_OBFUSCATE_BrowseOutputFile, 2, 2);
+            obfuscateLayout.Controls.Add(label_OBFUSCATE_CommandTemplate, 0, 3);
+            obfuscateLayout.Controls.Add(textBox_OBFUSCATE_CommandTemplate, 1, 3);
+            obfuscateLayout.SetColumnSpan(textBox_OBFUSCATE_CommandTemplate, 2);
+            obfuscateLayout.Controls.Add(button_OBFUSCATE_Run, 1, 4);
+            obfuscateLayout.SetColumnSpan(button_OBFUSCATE_Run, 2);
+
+            tabPageObfuscate.Controls.Add(obfuscateLayout);
+
+            int insertIndex = tabControlMain.TabPages.IndexOf(tabPageSign);
+            if (insertIndex >= 0)
+                tabControlMain.TabPages.Insert(insertIndex, tabPageObfuscate);
+            else
+                tabControlMain.TabPages.Add(tabPageObfuscate);
         }
 
         #region Context menu args
@@ -1171,6 +1332,128 @@ namespace APKToolGUI
         }
         #endregion
 
+        #region DptShell
+        private void InitializeDptShell()
+        {
+            dptShell = new DptShell(javaPath ?? "java", ResolveObfuscateToolPath());
+            dptShell.OutputDataReceived += DptShell_OutputDataReceived;
+            dptShell.ErrorDataReceived += DptShell_ErrorDataReceived;
+        }
+
+        private void DptShell_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(e.Data))
+                ToLog(ApktoolEventType.None, e.Data);
+        }
+
+        private void DptShell_ErrorDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(e.Data))
+                ToLog(ApktoolEventType.Error, e.Data);
+        }
+
+        internal async Task<int> Obfuscate(string inputFile, string outputFile)
+        {
+            int code = 0;
+
+            if (String.IsNullOrWhiteSpace(inputFile) || !File.Exists(inputFile))
+            {
+                MessageBox.Show(Language.WarningFileForObfuscationNotSelected, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 1;
+            }
+
+            string resolvedOutput = outputFile;
+            if (String.IsNullOrWhiteSpace(resolvedOutput))
+            {
+                string directory = Path.GetDirectoryName(inputFile) ?? String.Empty;
+                string fileName = Path.GetFileNameWithoutExtension(inputFile) + "_obfuscated.apk";
+                resolvedOutput = Path.Combine(directory, fileName);
+                BeginInvoke(new Action(() => textBox_OBFUSCATE_OutputFile.Text = resolvedOutput));
+            }
+
+            string toolPath = ResolveObfuscateToolPath();
+
+            if ((String.IsNullOrWhiteSpace(toolPath) || !File.Exists(toolPath)) && String.IsNullOrWhiteSpace(Settings.Default.Obfuscate_ToolPath))
+            {
+                bool downloaded = await Task.Run(() => DptShellDownloader.TryEnsureToolAvailable(
+                    Program.DPTSHELL_PATH,
+                    message => ToLog(ApktoolEventType.Infomation, message),
+                    message => ToLog(ApktoolEventType.Error, message)));
+
+                if (downloaded)
+                    toolPath = ResolveObfuscateToolPath();
+            }
+
+            if (String.IsNullOrWhiteSpace(toolPath) || !File.Exists(toolPath))
+            {
+                Error(String.Format(Language.ObfuscateToolMissing, toolPath));
+                return 1;
+            }
+
+            if (dptShell == null)
+            {
+                dptShell = new DptShell(javaPath ?? "java", toolPath);
+                dptShell.OutputDataReceived += DptShell_OutputDataReceived;
+                dptShell.ErrorDataReceived += DptShell_ErrorDataReceived;
+            }
+            else
+            {
+                dptShell.JavaPath = javaPath ?? "java";
+                dptShell.JarPath = toolPath;
+            }
+
+            string arguments = BuildObfuscateArguments(inputFile, resolvedOutput);
+            if (String.IsNullOrWhiteSpace(arguments))
+            {
+                Error(Language.ObfuscateCommandTemplateInvalid);
+                return 1;
+            }
+
+            Running(Language.Obfuscating);
+            ToLog(ApktoolEventType.None, String.Format(Language.InputFile, inputFile));
+            ToLog(ApktoolEventType.None, String.Format(Language.ObfuscateOutputTarget, resolvedOutput));
+
+            try
+            {
+                await Task.Factory.StartNew(() =>
+                {
+                    string directory = Path.GetDirectoryName(resolvedOutput);
+                    if (!String.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                        Directory.CreateDirectory(directory);
+
+                    code = dptShell.Obfuscate(arguments);
+                    if (code == 0)
+                        Done(String.Format(Language.ObfuscationCompleted, resolvedOutput));
+                    else
+                        Error(Language.ErrorObfuscating);
+                });
+            }
+            catch (Exception ex)
+            {
+                Error(ex);
+                code = 1;
+            }
+
+            return code;
+        }
+
+        private string ResolveObfuscateToolPath()
+        {
+            if (!String.IsNullOrWhiteSpace(Settings.Default.Obfuscate_ToolPath))
+                return Settings.Default.Obfuscate_ToolPath;
+            return Program.DPTSHELL_PATH;
+        }
+
+        private string BuildObfuscateArguments(string inputFile, string outputFile)
+        {
+            string template = Settings.Default.Obfuscate_CommandTemplate;
+            if (String.IsNullOrWhiteSpace(template))
+                template = "obfuscate -i \"{input}\" -o \"{output}\"";
+
+            return template.Replace("{input}", inputFile).Replace("{output}", outputFile);
+        }
+        #endregion
+
         #region Signapk
         private void InitializeSignapk()
         {
@@ -1391,6 +1674,7 @@ namespace APKToolGUI
                     InitializeAPKTool();
                     InitializeSignapk();
                     InitializeApkEditor();
+                    InitializeDptShell();
 
                     string javaVersion = apktool.GetJavaVersion();
                     if (javaVersion != null)
@@ -1533,6 +1817,17 @@ namespace APKToolGUI
                 else
                     button_SIGN_Sign.Enabled = value;
 
+                if (button_OBFUSCATE_Run != null)
+                {
+                    if (button_OBFUSCATE_Run.InvokeRequired)
+                        button_OBFUSCATE_Run.BeginInvoke(new Action(delegate
+                        {
+                            button_OBFUSCATE_Run.Enabled = value;
+                        }));
+                    else
+                        button_OBFUSCATE_Run.Enabled = value;
+                }
+
                 if (decSmaliBtn.InvokeRequired)
                     decSmaliBtn.BeginInvoke(new Action(delegate
                     {
@@ -1618,6 +1913,8 @@ namespace APKToolGUI
                 baksmali.Cancel();
                 smali.Cancel();
                 zipalign.Cancel();
+                if (dptShell != null)
+                    dptShell.Cancel();
                 signapk.Cancel();
             }
             catch (Exception ex)

@@ -47,6 +47,11 @@ namespace APKToolGUI.Handlers
             Register(main.textBox_SIGN_InputFile, main.signPanel, signEventHandler, apk);
             Register(main.button_SIGN_Sign, main.signPanel, signEventHandler, apk);
 
+            DragEventHandler obfuscateEventHandler = new DragEventHandler((sender, e) => { DropApkToObfuscate(e); });
+            Register(main.tabPageObfuscate, null, obfuscateEventHandler, apks);
+            Register(main.textBox_OBFUSCATE_InputFile, main.tabPageObfuscate, obfuscateEventHandler, apks);
+            Register(main.button_OBFUSCATE_Run, main.tabPageObfuscate, obfuscateEventHandler, apks);
+
             DragEventHandler mergeEventHandler = new DragEventHandler((sender, e) => { DropApkToMerge(e); });
             Register(main.mergePanel, null, mergeEventHandler, apks);
             Register(main.splitApkPathTxtBox, main.mergePanel, mergeEventHandler, apks);
@@ -150,6 +155,29 @@ namespace APKToolGUI.Handlers
                     main.textBox_SIGN_InputFile.Text = apkFile;
 
                     await main.Sign(apkFile);
+                }
+            }
+        }
+
+        private async void DropApkToObfuscate(DragEventArgs e)
+        {
+            string[] apkFiles = null;
+            if (e.DropManyByEnd(file => apkFiles = file, apks))
+            {
+                main.tabPageObfuscate.BackColor = PanelBackColor();
+
+                foreach (var apkFile in apkFiles)
+                {
+                    main.textBox_OBFUSCATE_InputFile.Text = apkFile;
+
+                    if (String.IsNullOrWhiteSpace(main.textBox_OBFUSCATE_OutputFile.Text))
+                    {
+                        string directory = Path.GetDirectoryName(apkFile) ?? String.Empty;
+                        string fileName = Path.GetFileNameWithoutExtension(apkFile) + "_obfuscated.apk";
+                        main.textBox_OBFUSCATE_OutputFile.Text = Path.Combine(directory, fileName);
+                    }
+
+                    await main.Obfuscate(apkFile, main.textBox_OBFUSCATE_OutputFile.Text);
                 }
             }
         }
