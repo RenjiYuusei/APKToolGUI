@@ -554,11 +554,22 @@ namespace APKToolGUI
             groupBox_OBF_Output.Controls.Add(textBox_OBF_OutputDir);
             groupBox_OBF_Output.Controls.Add(button_OBF_BrowseOutputDir);
 
+            button_OBF_Obfuscate = new Button
+            {
+                Name = "button_OBF_Obfuscate",
+                Location = new Point(6, groupBox_OBF_Output.Bottom + 12),
+                Size = new Size(groupWidth, 32),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right,
+                Text = Language.ObfuscateButton,
+                UseVisualStyleBackColor = true
+            };
+            button_OBF_Obfuscate.AllowDrop = true;
+
             groupBox_OBF_Options = new GroupBox
             {
                 Name = "groupBox_OBF_Options",
                 Text = Language.ObfuscateOptionsGroup,
-                Location = new Point(6, groupBox_OBF_Output.Bottom + 10),
+                Location = new Point(6, button_OBF_Obfuscate.Bottom + 12),
                 Size = new Size(groupWidth, 230),
                 Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
             };
@@ -694,21 +705,10 @@ namespace APKToolGUI
             groupBox_OBF_Options.Controls.Add(textBox_OBF_RulesFile);
             groupBox_OBF_Options.Controls.Add(button_OBF_BrowseRulesFile);
 
-            button_OBF_Obfuscate = new Button
-            {
-                Name = "button_OBF_Obfuscate",
-                Location = new Point(rightButtonX, groupBox_OBF_Options.Bottom + 12),
-                Size = new Size(buttonWidth, 32),
-                Anchor = AnchorStyles.Top | AnchorStyles.Right,
-                Text = Language.ObfuscateButton,
-                UseVisualStyleBackColor = true
-            };
-            button_OBF_Obfuscate.AllowDrop = true;
-
             tabPageObfuscate.Controls.Add(groupBox_OBF_Input);
             tabPageObfuscate.Controls.Add(groupBox_OBF_Output);
-            tabPageObfuscate.Controls.Add(groupBox_OBF_Options);
             tabPageObfuscate.Controls.Add(button_OBF_Obfuscate);
+            tabPageObfuscate.Controls.Add(groupBox_OBF_Options);
 
             int insertIndex = tabControlMain.TabPages.IndexOf(tabPageSign);
             if (insertIndex < 0)
