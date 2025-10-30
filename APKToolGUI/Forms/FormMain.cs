@@ -1632,24 +1632,16 @@ namespace APKToolGUI
         {
             if (apkIconPicBox.Image != null)
             {
-                SaveFileDialog saveFile = new SaveFileDialog();
-                saveFile.Filter = "PNG Image|*.png";
-                saveFile.Title = "Save an Image File";
-                feat-apk-tool-gui-updates
-                saveFile.FileName = appTxtBox.Text; // Set default filename to app name
-
-                if (saveFile.ShowDialog() == DialogResult.OK)
+                using (SaveFileDialog saveFile = new SaveFileDialog())
                 {
-                    if (saveFile.FileName != "")
+                    saveFile.Filter = "PNG Image|*.png";
+                    saveFile.Title = "Save an Image File";
+                    saveFile.FileName = appTxtBox.Text; // Set default filename to app name
+
+                    if (saveFile.ShowDialog() == DialogResult.OK && !String.IsNullOrEmpty(saveFile.FileName))
                     {
                         apkIconPicBox.Image.Save(saveFile.FileName, System.Drawing.Imaging.ImageFormat.Png);
                     }
-                saveFile.ShowDialog();
-
-                if (saveFile.FileName != "")
-                {
-                    apkIconPicBox.Image.Save(saveFile.FileName, System.Drawing.Imaging.ImageFormat.Png);
- master
                 }
             }
         }
