@@ -486,6 +486,78 @@
   <data name="DevicesFound" xml:space="preserve">
     <value>Найдено {0} устройств</value>
   </data>
+  <data name="ObfuscateTabTitle" xml:space="preserve">
+    <value>Обфускация</value>
+  </data>
+  <data name="ObfuscateInputGroup" xml:space="preserve">
+    <value>Входные данные</value>
+  </data>
+  <data name="ObfuscateOutputGroup" xml:space="preserve">
+    <value>Выходные данные</value>
+  </data>
+  <data name="ObfuscateOptionsGroup" xml:space="preserve">
+    <value>Параметры</value>
+  </data>
+  <data name="ObfuscateInputFileLabel" xml:space="preserve">
+    <value>Файл пакета:</value>
+  </data>
+  <data name="ObfuscateBrowse" xml:space="preserve">
+    <value>Обзор...</value>
+  </data>
+  <data name="ObfuscateUseOutputDir" xml:space="preserve">
+    <value>Использовать выходной каталог</value>
+  </data>
+  <data name="ObfuscateOutputDirectoryLabel" xml:space="preserve">
+    <value>Выходной каталог:</value>
+  </data>
+  <data name="ObfuscateDebug" xml:space="preserve">
+    <value>Сделать пакет отлаживаемым (--debug)</value>
+  </data>
+  <data name="ObfuscateDisableAcf" xml:space="preserve">
+    <value>Отключить фабрику компонентов приложения (--disable-acf)</value>
+  </data>
+  <data name="ObfuscateDumpCode" xml:space="preserve">
+    <value>Создать дамп кода (--dump-code)</value>
+  </data>
+  <data name="ObfuscateNoisyLog" xml:space="preserve">
+    <value>Включить подробный журнал (--noisy-log)</value>
+  </data>
+  <data name="ObfuscateSmaller" xml:space="preserve">
+    <value>Оптимизировать для меньшего размера (--smaller)</value>
+  </data>
+  <data name="ObfuscateNoSign" xml:space="preserve">
+    <value>Не подписывать пакет (--no-sign)</value>
+  </data>
+  <data name="ObfuscateKeepClasses" xml:space="preserve">
+    <value>Сохранить классы (--keep-classes)</value>
+  </data>
+  <data name="ObfuscateExcludeAbiLabel" xml:space="preserve">
+    <value>Список исключаемых ABI (через запятую):</value>
+  </data>
+  <data name="ObfuscateRulesFileLabel" xml:space="preserve">
+    <value>Файл правил:</value>
+  </data>
+  <data name="ObfuscateButton" xml:space="preserve">
+    <value>Обфусцировать</value>
+  </data>
+  <data name="Obfuscating" xml:space="preserve">
+    <value>Обфускация...</value>
+  </data>
+  <data name="ObfuscateSuccessfullyCompleted" xml:space="preserve">
+    <value>Обфускация успешно завершена.</value>
+  </data>
+  <data name="ObfuscateOutputSavedTo" xml:space="preserve">
+    <value>Обфусцированный пакет сохранён по пути "{0}".</value>
+  </data>
+  <data name="ObfuscateInputFileNotFound" xml:space="preserve">
+    <value>Входной файл не найден. Выберите корректный пакет Android.</value>
+  </data>
+  <data name="ObfuscateRulesFileNotFound" xml:space="preserve">
+    <value>Файл правил не найден. Выберите корректный файл.</value>
+  </data>
+  <data name="ErrorObfuscating" xml:space="preserve">
+    <value>Ошибка при обфускации пакета.</value>
+  </data>
   <data name="InstallApkFailed" xml:space="preserve">
     <value>Ошибка при установке АРК</value>
   </data>
