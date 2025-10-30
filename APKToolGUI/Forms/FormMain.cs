@@ -1512,22 +1512,24 @@ namespace APKToolGUI
         #region DPT Shell
         private void InitializeDptShell()
         {
-            bool resourcesReady = DptShellResourceManager.EnsureResources(
-                message => ToLog(ApktoolEventType.Infomation, message),
-                message => ToLog(ApktoolEventType.Error, message));
+            string jarPath = Program.DPT_PATH;
+            string shellFilesPath = Program.DptShellFilesPath;
+            bool hasShellFiles = Directory.Exists(shellFilesPath) && Directory.EnumerateFileSystemEntries(shellFilesPath).Any();
 
-            if (!resourcesReady)
+            if (!File.Exists(jarPath) || !hasShellFiles)
             {
-                ToLog(ApktoolEventType.Error, "Unable to prepare dpt-shell resources. Please download the latest release and place it inside the Resources folder.");
+                const string message = "dpt-shell resources not found. Please place dpt.jar and the shell-files directory into the Resources folder.";
+
+                ToLog(ApktoolEventType.Error, message);
                 BeginInvoke(new Action(() =>
                 {
                     tabPageObfuscate.Enabled = false;
-                    ShowMessage("Unable to prepare dpt-shell resources. Please ensure you have an internet connection or place the dpt-shell release into the Resources folder.", MessageBoxIcon.Error);
+                    ShowMessage(message, MessageBoxIcon.Error);
                 }));
                 return;
             }
 
-            dptShell = new DptShell(javaPath, Program.DPT_PATH);
+            dptShell = new DptShell(javaPath, jarPath);
             dptShell.DptShellOutputDataReceived += DptShell_OutputDataReceived;
             dptShell.DptShellErrorDataReceived += DptShell_ErrorDataReceived;
 

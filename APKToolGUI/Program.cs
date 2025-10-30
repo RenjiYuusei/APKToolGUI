@@ -1,6 +1,5 @@
 ﻿using APKToolGUI.Languages;
 using APKToolGUI.Properties;
-using APKToolGUI.Utils;
 using Bluegrams.Application;
 using Dark.Net;
 using OSVersionExtension;
@@ -76,8 +75,6 @@ namespace APKToolGUI
                 }
                 else
                 {
-                    DptShellResourceManager.EnsureResources();
-
                     if (arg.Length == 2)
                     {
                         switch (arg[0])
