@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -485,78 +485,6 @@
   </data>
   <data name="DevicesFound" xml:space="preserve">
     <value>{0} eszköz található</value>
-  </data>
-  <data name="ObfuscateTabTitle" xml:space="preserve">
-    <value>Obfuszkálás</value>
-  </data>
-  <data name="ObfuscateInputGroup" xml:space="preserve">
-    <value>Bemenet</value>
-  </data>
-  <data name="ObfuscateOutputGroup" xml:space="preserve">
-    <value>Kimenet</value>
-  </data>
-  <data name="ObfuscateOptionsGroup" xml:space="preserve">
-    <value>Beállítások</value>
-  </data>
-  <data name="ObfuscateInputFileLabel" xml:space="preserve">
-    <value>Csomagfájl:</value>
-  </data>
-  <data name="ObfuscateBrowse" xml:space="preserve">
-    <value>Tallózás...</value>
-  </data>
-  <data name="ObfuscateUseOutputDir" xml:space="preserve">
-    <value>Kimeneti könyvtár használata</value>
-  </data>
-  <data name="ObfuscateOutputDirectoryLabel" xml:space="preserve">
-    <value>Kimeneti könyvtár:</value>
-  </data>
-  <data name="ObfuscateDebug" xml:space="preserve">
-    <value>Csomag debuggálhatóvá tétele (--debug)</value>
-  </data>
-  <data name="ObfuscateDisableAcf" xml:space="preserve">
-    <value>Alkalmazáskomponens-gyár letiltása (--disable-acf)</value>
-  </data>
-  <data name="ObfuscateDumpCode" xml:space="preserve">
-    <value>Kód kiírása (--dump-code)</value>
-  </data>
-  <data name="ObfuscateNoisyLog" xml:space="preserve">
-    <value>Részletes napló engedélyezése (--noisy-log)</value>
-  </data>
-  <data name="ObfuscateSmaller" xml:space="preserve">
-    <value>Kisebb méretre optimalizálás (--smaller)</value>
-  </data>
-  <data name="ObfuscateNoSign" xml:space="preserve">
-    <value>Csomag aláírásának kihagyása (--no-sign)</value>
-  </data>
-  <data name="ObfuscateKeepClasses" xml:space="preserve">
-    <value>Osztályok megtartása (--keep-classes)</value>
-  </data>
-  <data name="ObfuscateExcludeAbiLabel" xml:space="preserve">
-    <value>Kizárt ABI-k listája (vesszővel elválasztva):</value>
-  </data>
-  <data name="ObfuscateRulesFileLabel" xml:space="preserve">
-    <value>Szabályfájl:</value>
-  </data>
-  <data name="ObfuscateButton" xml:space="preserve">
-    <value>Obfuszkálás</value>
-  </data>
-  <data name="Obfuscating" xml:space="preserve">
-    <value>Obfuszkálás folyamatban</value>
-  </data>
-  <data name="ObfuscateSuccessfullyCompleted" xml:space="preserve">
-    <value>Az obfuszkálás sikeresen befejeződött.</value>
-  </data>
-  <data name="ObfuscateOutputSavedTo" xml:space="preserve">
-    <value>Az obfuszkált csomag ide lett mentve: "{0}".</value>
-  </data>
-  <data name="ObfuscateInputFileNotFound" xml:space="preserve">
-    <value>A bemeneti fájl nem található. Válasszon érvényes Android csomagot.</value>
-  </data>
-  <data name="ObfuscateRulesFileNotFound" xml:space="preserve">
-    <value>A szabályfájl nem található. Válasszon érvényes fájlt.</value>
-  </data>
-  <data name="ErrorObfuscating" xml:space="preserve">
-    <value>Hiba történt a csomag obfuszkálása közben.</value>
   </data>
   <data name="InstallApkFailed" xml:space="preserve">
     <value>Az APK telepítése nem sikerült</value>

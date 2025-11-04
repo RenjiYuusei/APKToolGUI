@@ -47,11 +47,6 @@ namespace APKToolGUI.Handlers
             Register(main.textBox_SIGN_InputFile, main.signPanel, signEventHandler, apk);
             Register(main.button_SIGN_Sign, main.signPanel, signEventHandler, apk);
 
-            DragEventHandler obfuscateEventHandler = new DragEventHandler((sender, e) => { DropApkToObfuscate(e); });
-            Register(main.tabPageObfuscate, null, obfuscateEventHandler, apks);
-            Register(main.textBox_OBF_InputFile, main.tabPageObfuscate, obfuscateEventHandler, apks);
-            Register(main.button_OBF_Obfuscate, main.tabPageObfuscate, obfuscateEventHandler, apks);
-
             DragEventHandler mergeEventHandler = new DragEventHandler((sender, e) => { DropApkToMerge(e); });
             Register(main.mergePanel, null, mergeEventHandler, apks);
             Register(main.splitApkPathTxtBox, main.mergePanel, mergeEventHandler, apks);
@@ -94,7 +89,6 @@ namespace APKToolGUI.Handlers
                 foreach (var apkFile in apkFiles)
                 {
                     main.textBox_DECODE_InputAppPath.Text = apkFile;
-                    main.SetObfuscateInputFromSelection(apkFile);
 
                     if (!Settings.Default.Decode_DontParseApkInfo)
                         await main.GetApkInfo(apkFile);
@@ -160,21 +154,6 @@ namespace APKToolGUI.Handlers
             }
         }
 
-        private async void DropApkToObfuscate(DragEventArgs e)
-        {
-            string[] apkFiles = null;
-            if (e.DropManyByEnd(file => apkFiles = file, apks))
-            {
-                main.tabPageObfuscate.BackColor = PanelBackColor();
-
-                foreach (var apkFile in apkFiles)
-                {
-                    main.textBox_OBF_InputFile.Text = apkFile;
-                    await main.Obfuscate(apkFile);
-                }
-            }
-        }
-
         private async void DropApkToMerge(DragEventArgs e)
         {
             string[] apkFiles = null;
@@ -232,7 +211,6 @@ namespace APKToolGUI.Handlers
                 main.smaliBrowseInputDirTxtBox.Text = apkFile;
                 main.basicInfoTabPage.BackColor = PanelBackColor();
                 main.GetApkInfo(apkFile);
-                main.SetObfuscateInputFromSelection(apkFile);
             }
         }
 

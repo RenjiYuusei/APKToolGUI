@@ -198,7 +198,6 @@ namespace APKToolGUI
                 ADBWINAPI_PATH,
                 ADBWINUSBAPI_PATH,
                 LIBWINP_PATH,
-                DPT_PATH,
             };
             for (int i = 0; i < fileList.Length; i++)
                 if (!File.Exists(fileList[i]))
@@ -241,7 +240,6 @@ namespace APKToolGUI
         public static string TempDirectory()
         {
             //Generate new every new instance to avoid conflict
-            //We want to keep obfuscated path short as possible to prevent long path error
             if (Settings.Default.UseCustomTempDir)
                 return Path.Combine(Settings.Default.TempDir);
             else
@@ -269,8 +267,6 @@ namespace APKToolGUI
         public static string AAPT_PATH { get { return Path.Combine(RES_PATH, "aapt.exe"); } }
         public static string AAPT2_PATH { get { return Path.Combine(RES_PATH, "aapt2.exe"); } }
         public static string APKEDITOR_PATH { get { return Path.Combine(RES_PATH, "apkeditor.jar"); } }
-        public static string DPT_PATH { get { return Path.Combine(RES_PATH, "dpt.jar"); } }
-        public static string DptShellFilesPath { get { return Path.Combine(RES_PATH, "shell-files"); } }
         public static string ADB_PATH { get { return Path.Combine(RES_PATH, "adb.exe"); } }
         public static string ADBWINAPI_PATH { get { return Path.Combine(RES_PATH, "AdbWinApi.dll"); } }
         public static string ADBWINUSBAPI_PATH { get { return Path.Combine(RES_PATH, "AdbWinUsbApi.dll"); } }
