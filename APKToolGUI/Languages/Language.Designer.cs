@@ -1330,7 +1330,7 @@ namespace APKToolGUI.Languages {
         }
 
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Language installed. Restart application?.
         /// </summary>
         internal static string SetLanguageRestartApplication {
             get {

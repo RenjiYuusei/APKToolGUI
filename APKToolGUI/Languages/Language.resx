@@ -541,6 +541,6 @@
     <value>Can't detect APKEditor version</value>
   </data>
   <data name="SetLanguageRestartApplication" xml:space="preserve">
-    <value />
+    <value>Language installed. Restart application?</value>
   </data>
 </root>
