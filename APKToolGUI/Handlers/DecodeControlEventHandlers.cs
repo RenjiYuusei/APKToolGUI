@@ -59,7 +59,6 @@ namespace APKToolGUI.Handlers
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     main.textBox_DECODE_InputAppPath.Text = ofd.FileName;
-                    main.SetObfuscateInputFromSelection(ofd.FileName);
 
                     if (!Settings.Default.Decode_DontParseApkInfo)
                         main.GetApkInfo(ofd.FileName);
